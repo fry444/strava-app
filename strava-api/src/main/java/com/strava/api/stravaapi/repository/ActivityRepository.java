@@ -36,17 +36,7 @@ public class ActivityRepository {
 
         ResultSet resultSet = executeStatement(select.build());
 
-        List<Activity> result = new ArrayList<>();
-
-        resultSet.forEach(a -> result.add(
-                new Activity(a.getUuid("id"),
-                        a.getString("usuario"),
-                        a.getInstant("fecha"),
-                        a.getString("tipo"),
-                        a.getString("titulo"),
-                        a.getString("datos"))
-        ));
-        return result;
+        return parseResult(resultSet);
     }
 
     public List<Activity> selectAllFromUser(String username) {
@@ -55,17 +45,7 @@ public class ActivityRepository {
         PreparedStatement preparedSelectUser = cassandraConnector.getSession().prepare(select.build());
         ResultSet resultSet = cassandraConnector.getSession().execute(preparedSelectUser.bind(username));
 
-        List<Activity> result = new ArrayList<>();
-
-        resultSet.forEach(a -> result.add(
-                new Activity(a.getUuid("id"),
-                        a.getString("usuario"),
-                        a.getInstant("fecha"),
-                        a.getString("tipo"),
-                        a.getString("titulo"),
-                        a.getString("datos"))
-        ));
-        return result;
+        return parseResult(resultSet);
     }
 
     public UUID insert(Activity activity) {
@@ -104,6 +84,19 @@ public class ActivityRepository {
     private ResultSet executeStatement(SimpleStatement statement) {
         statement.setKeyspace(CqlIdentifier.fromCql(KEYSPACE));
         return cassandraConnector.getSession().execute(statement);
+    }
+
+    private List<Activity> parseResult(ResultSet resultSet){
+        List<Activity> result = new ArrayList<>();
+        resultSet.forEach(a -> result.add(
+                new Activity(a.getUuid("id"),
+                        a.getString("usuario"),
+                        a.getInstant("fecha"),
+                        a.getString("tipo"),
+                        a.getString("titulo"),
+                        a.getString("datos"))
+        ));
+        return result;
     }
 
 }
