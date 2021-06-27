@@ -29,8 +29,14 @@ public class ActivityController {
 
 
     @GetMapping()
-    public ResponseEntity<Iterable<Activity>> getActivities() {
-        return ResponseEntity.ok(activityRepository.selectAll());
+    public ResponseEntity<Iterable<Activity>> getActivities( @RequestParam(value = "limit", defaultValue = "100") int limit) {
+        return ResponseEntity.ok(activityRepository.selectAll(limit));
+    }
+
+    @GetMapping(path = "/{username}")
+    public ResponseEntity<Iterable<Activity>> getUserActivities(
+            @PathVariable String username) {
+        return ResponseEntity.ok(activityRepository.selectAllFromUser(username));
     }
 
     @PostMapping()

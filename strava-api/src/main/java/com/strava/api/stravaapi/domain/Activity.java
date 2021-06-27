@@ -12,7 +12,7 @@ import java.util.UUID;
 @Setter
 public class Activity {
     private UUID id;
-    private String userName;
+    private String username;
     private Instant date;
     private String type;
     private String title;
@@ -20,7 +20,7 @@ public class Activity {
 
     public Activity(UUID id, String usuario, Instant fecha, String tipo, String titulo, String datos) {
         this.id = id;
-        this.userName = usuario;
+        this.username = usuario;
         this.date = fecha;
         this.type = tipo;
         this.title = titulo;

@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static com.datastax.oss.driver.api.querybuilder.QueryBuilder.bindMarker;
+
 @Service
 public class ActivityRepository {
     private final CassandraConnector cassandraConnector;
@@ -29,10 +31,29 @@ public class ActivityRepository {
         cassandraConnector.connect();
     }
 
-    public List<Activity> selectAll() {
-        Select select = QueryBuilder.selectFrom(TABLE_NAME).all();
+    public List<Activity> selectAll(int limit) {
+        Select select = QueryBuilder.selectFrom(TABLE_NAME).all().limit(limit);
 
         ResultSet resultSet = executeStatement(select.build());
+
+        List<Activity> result = new ArrayList<>();
+
+        resultSet.forEach(a -> result.add(
+                new Activity(a.getUuid("id"),
+                        a.getString("usuario"),
+                        a.getInstant("fecha"),
+                        a.getString("tipo"),
+                        a.getString("titulo"),
+                        a.getString("datos"))
+        ));
+        return result;
+    }
+
+    public List<Activity> selectAllFromUser(String username) {
+        Select select = QueryBuilder.selectFrom(TABLE_NAME).all().whereColumn("usuario").isEqualTo(bindMarker());
+
+        PreparedStatement preparedSelectUser = cassandraConnector.getSession().prepare(select.build());
+        ResultSet resultSet = cassandraConnector.getSession().execute(preparedSelectUser.bind(username));
 
         List<Activity> result = new ArrayList<>();
 
@@ -54,12 +75,12 @@ public class ActivityRepository {
         activity.setDate(Instant.now());
 
         RegularInsert insertInto = QueryBuilder.insertInto(TABLE_NAME)
-                .value("id", QueryBuilder.bindMarker())
-                .value("usuario", QueryBuilder.bindMarker())
-                .value("fecha", QueryBuilder.bindMarker())
-                .value("tipo", QueryBuilder.bindMarker())
-                .value("titulo", QueryBuilder.bindMarker())
-                .value("datos", QueryBuilder.bindMarker());
+                .value("id", bindMarker())
+                .value("usuario", bindMarker())
+                .value("fecha", bindMarker())
+                .value("tipo", bindMarker())
+                .value("titulo", bindMarker())
+                .value("datos", bindMarker());
 
         SimpleStatement insertStatement = insertInto.build();
 
@@ -69,7 +90,7 @@ public class ActivityRepository {
 
         BoundStatement statement = preparedStatement.bind()
                 .setUuid(0, activity.getId())
-                .setString(1, activity.getUserName())
+                .setString(1, activity.getUsername())
                 .setInstant(2, activity.getDate())
                 .setString(3, activity.getType())
                 .setString(4, activity.getTitle())
