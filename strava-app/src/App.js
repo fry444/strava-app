@@ -3,7 +3,6 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
-import Campaigns from "./components/campaigns/Campaigns";
 import Test from "./components/Test";
 import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -68,7 +67,6 @@ const App = () => {
           <Route exact path="/activities" component={Activities} />
           <Route exact path="/activities/new" component={NewActivity} />
           <Route exact path="/community" component={Community} />
-          <Route exact path="/campaigns" component={Campaigns} />
           <Route exact path="/test" component={Test} />
         </Switch>
       </main>
