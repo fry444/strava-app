@@ -76,7 +76,7 @@ const NewActivity = (props) => {
   const [effort, updateEffort] = useState("");
   const [redirect, setRedirect] = useState(false);
 
-  const submitNewCampaign = (e) => {
+  const submitNewActivity = (e) => {
     dispatch(addActivityAction({
         type,
         username,
@@ -97,7 +97,7 @@ const NewActivity = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    submitNewCampaign();    
+    submitNewActivity();    
   }
 
   return (
