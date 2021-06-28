@@ -49,12 +49,10 @@ public class ActivityRepository {
         return parseResult(resultSet);
     }
 
-    public UUID insert(Activity activity) {
+    public Activity insert(Activity activity) {
         UUID activityId = Uuids.timeBased();
-
         activity.setId(activityId);
         activity.setDate(Instant.now());
-
         RegularInsert insertInto = QueryBuilder.insertInto(TABLE_NAME)
                 .value("id", bindMarker())
                 .value("usuario", bindMarker())
@@ -62,13 +60,8 @@ public class ActivityRepository {
                 .value("tipo", bindMarker())
                 .value("titulo", bindMarker())
                 .value("datos", bindMarker());
-
         SimpleStatement insertStatement = insertInto.build();
-
-        //insertStatement = insertStatement.setKeyspace(KEYSPACE);
-
         PreparedStatement preparedStatement = cassandraConnector.getSession().prepare(insertStatement);
-
         BoundStatement statement = preparedStatement.bind()
                 .setUuid(0, activity.getId())
                 .setString(1, activity.getUsername())
@@ -76,10 +69,8 @@ public class ActivityRepository {
                 .setString(3, activity.getType())
                 .setString(4, activity.getTitle())
                 .setString(5, activity.getData());
-
         cassandraConnector.getSession().execute(statement);
-
-        return activityId;
+        return activity;
     }
 
     private ResultSet executeStatement(SimpleStatement statement) {

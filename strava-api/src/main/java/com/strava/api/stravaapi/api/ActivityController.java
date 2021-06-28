@@ -30,7 +30,7 @@ public class ActivityController {
 
 
     @GetMapping()
-    public ResponseEntity<Iterable<Activity>> getActivities( @RequestParam(value = "limit", defaultValue = "100") int limit) {
+    public ResponseEntity<Iterable<Activity>> getActivities( @RequestParam(required = false, value = "limit", defaultValue = "100") int limit) {
         return ResponseEntity.ok(activityRepository.selectAll(limit));
     }
 
@@ -43,8 +43,8 @@ public class ActivityController {
 
     @PostMapping()
     public ResponseEntity<Object> postActivity(@RequestBody Activity activity) {
-        final UUID activityId = activityRepository.insert(activity);
-        logger.info(NEW_ACTIVITY_LOG, activityId.toString());
-        return ResponseEntity.status(HttpStatus.CREATED).body(activityId);
+        final Activity createdActivity = activityRepository.insert(activity);
+        logger.info(NEW_ACTIVITY_LOG, createdActivity.getId().toString());
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdActivity);
     }
 }

@@ -1,0 +1,60 @@
+{
+  "name": "layout-test",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@date-io/date-fns": "1.x",
+    "@material-ui/core": "^4.9.11",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.55",
+    "@material-ui/pickers": "^3.2.10",
+    "@stomp/stompjs": "^5.4.4",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
+    "date-fns": "^2.0.0-beta.5",
+    "fg-loadcss": "^2.1.0",
+    "heatmap.js": "^2.0.5",
+    "konva": "^6.0.0",
+    "material-ui-dropzone": "^3.0.0",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "material-ui-pickers": "^2.2.4",
+    "react": "^16.13.1",
+    "react-chartjs-2": "^2.9.0",
+    "react-dom": "^16.13.1",
+    "react-konva": "^16.13.0-2",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "socket.io": "^2.3.0",
+    "sweetalert2": "^9.10.12",
+    "typeface-roboto": "0.0.75",
+    "use-image": "^1.0.5",
+    "websocket": "^1.0.31"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

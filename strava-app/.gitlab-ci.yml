@@ -1,0 +1,25 @@
+image: rambabusaravanan/firebase
+
+variables:
+  CI: 'false'
+
+stages:
+  - deploy
+
+cache:                  
+  paths:                
+    - node_modules/     
+  key: "$CI_BUILD_REPO" 
+
+deploy-prod:
+  stage: deploy
+  only:
+    - master
+  script:
+    - yarn
+    - yarn run build
+    - sed -i 's|^window.API_URL.*|window.API_URL="'$API_URL'";|' build/config.js
+    - sed -i 's|^window.WS_URL.*|window.WS_URL="'$WS_URL'";|' build/config.js
+    - firebase deploy --only hosting -m "$CI_PIPELINE_ID Build $CI_BUILD_ID" --token $FIREBASE_TOKEN
+  only:
+    - develop
