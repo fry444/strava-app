@@ -33,6 +33,7 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Cassandra -->
 		<dependency>
 			<groupId>com.datastax.oss</groupId>
 			<artifactId>java-driver-query-builder</artifactId>
@@ -53,6 +54,14 @@
 			<artifactId>java-driver-core</artifactId>
 			<version>4.8.0</version>
 		</dependency>
+
+		<!-- Neo4J -->
+		<dependency>
+			<groupId>org.neo4j.driver</groupId>
+			<artifactId>neo4j-java-driver</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

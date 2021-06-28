@@ -2,6 +2,7 @@ package com.strava.api.stravaapi.api;
 
 import com.strava.api.stravaapi.domain.Activity;
 import com.strava.api.stravaapi.repository.ActivityRepository;
+import com.strava.api.stravaapi.repository.ComunityRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,7 @@ public class ActivityController {
     @GetMapping(path = "/{username}")
     public ResponseEntity<Iterable<Activity>> getUserActivities(
             @PathVariable String username) {
+
         return ResponseEntity.ok(activityRepository.selectAllFromUser(username));
     }
 

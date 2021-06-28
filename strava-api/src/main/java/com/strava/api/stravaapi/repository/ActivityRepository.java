@@ -22,6 +22,7 @@ import static com.datastax.oss.driver.api.querybuilder.QueryBuilder.bindMarker;
 
 @Service
 public class ActivityRepository {
+
     private final CassandraConnector cassandraConnector;
     private static final String KEYSPACE = "strava";
     private static final String TABLE_NAME = "activity";
