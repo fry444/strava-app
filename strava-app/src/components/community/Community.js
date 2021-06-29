@@ -136,6 +136,9 @@ const Community = () => {
               <Paper className={classes.paper}>
               <Card className={classes.root}>
                 <CardContent>
+                <Typography variant="h6" style={{fontWeight: "bold"}}> 
+                Crear usuario
+                </Typography>
                 <TextField
                   style={{ marginBottom: 16 }}
                   label="Usuario"
@@ -157,6 +160,9 @@ const Community = () => {
             <Paper className={classes.paper}>
               <Card className={classes.root}>
                 <CardContent>
+                <Typography variant="h6" style={{fontWeight: "bold"}}> 
+                Crear relación
+                </Typography>
                 <Box mb={3}>
                 <InputLabel id="userFromSelectLabel">Usuario</InputLabel>
                 <Select
