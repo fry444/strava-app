@@ -37,7 +37,7 @@ public class ComunityRepository {
     public List<String> getUsers() {
         List<String> users = new ArrayList<>();
         StatementResult result = session.run(
-                "MATCH n:Usuario return n");
+                "MATCH (n:Usuario) return n");
         while (result.hasNext()) {
             users.add(result.next().fields().get(0).value().asMap().get("usuario").toString());
         }

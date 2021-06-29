@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(path = {"/comunity"}, produces = APPLICATION_JSON_VALUE)
+@RequestMapping(path = {"/community"}, produces = APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class ComunityController {
 
@@ -41,7 +41,7 @@ public class ComunityController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userFrom + " -> " + userTo);
     }
 
-    @GetMapping(path = "/user")
+    @GetMapping(path = "")
     public ResponseEntity<Object> getUsers() {
         return ResponseEntity.ok(comunityRepository.getUsers());
     }
