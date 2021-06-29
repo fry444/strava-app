@@ -2,12 +2,10 @@ package com.strava.api.stravaapi.repository;
 
 import com.strava.api.stravaapi.domain.User;
 import org.neo4j.driver.v1.*;
-import org.neo4j.driver.v1.types.Node;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ComunityRepository {
@@ -34,6 +32,16 @@ public class ComunityRepository {
                 "n.usuario = \"" + userFrom + "\" AND m.usuario = \"" + userTo + "\" " +
                 "CREATE (n)-[r:SIGUE]->(m) " +
                 "RETURN r;");
+    }
+
+    public List<String> getUsers() {
+        List<String> users = new ArrayList<>();
+        StatementResult result = session.run(
+                "MATCH n:Usuario return n");
+        while (result.hasNext()) {
+            users.add(result.next().fields().get(0).value().asMap().get("usuario").toString());
+        }
+        return users;
     }
 
     public List<String> getUserCommunity(String username) {

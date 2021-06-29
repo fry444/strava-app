@@ -2,7 +2,6 @@ package com.strava.api.stravaapi.api;
 
 import com.strava.api.stravaapi.domain.Activity;
 import com.strava.api.stravaapi.repository.ActivityRepository;
-import com.strava.api.stravaapi.repository.ComunityRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 

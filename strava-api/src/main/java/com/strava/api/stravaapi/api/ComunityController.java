@@ -1,8 +1,6 @@
 package com.strava.api.stravaapi.api;
 
-import com.strava.api.stravaapi.domain.Activity;
 import com.strava.api.stravaapi.domain.User;
-import com.strava.api.stravaapi.repository.ActivityRepository;
 import com.strava.api.stravaapi.repository.ComunityRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -11,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -43,6 +39,11 @@ public class ComunityController {
         comunityRepository.createFollowRelation(userFrom, userTo);
         logger.info(NEW_FOLLOW_LOG, userFrom, userTo);
         return ResponseEntity.status(HttpStatus.CREATED).body(userFrom + " -> " + userTo);
+    }
+
+    @GetMapping(path = "/user")
+    public ResponseEntity<Object> getUsers() {
+        return ResponseEntity.ok(comunityRepository.getUsers());
     }
 
     @GetMapping(path = "/{username}")
