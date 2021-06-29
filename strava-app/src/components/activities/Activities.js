@@ -67,9 +67,9 @@ const Activities = () => {
             </Box>
             </Box>
             
-          <Grid container justify="flex-start" spacing={2} >
+          <Grid container justify="flex-start" spacing={3} >
           {activities.length !== 0 && activities.map((activity) => (
-              <Grid key={activity.id} item>
+              <Grid key={activity.id} item xs={12}>
                 <Activity key={activity.id} activity={activity}></Activity>
               </Grid>
               ))

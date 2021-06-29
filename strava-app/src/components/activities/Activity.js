@@ -12,8 +12,6 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     borderRadius: 16,
-    maxWidth: 900,
-    width: 900,
     body: {
       lineHeight: 0
     }
@@ -38,6 +36,19 @@ const Activity = ({ activity }) => {
 
   const data = JSON.parse(activity.data);
 
+  const formatActivityType = (type) => {
+    switch(type) {
+      case "phisical":
+        return "ACTIVIDAD FÍSICA"
+      case "publication":
+        return "PUBLICACIÓN"
+      case "photo":
+        return "FOTO"
+      default:
+        return "ACTIVIDAD FÍSICA"
+    }
+  };
+
   return (
     <Card className={classes.paper}>
       <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between" mt={6} ml={6}>
@@ -49,7 +60,7 @@ const Activity = ({ activity }) => {
           </Box>
           <Box display="flex" flexDirection="column" ml={6} mr={6} justifyContent="center">
             <Typography color="textPrimary" variant="body2" noWrap>              
-              <Chip label={activity.type}/>
+              <Chip label={formatActivityType(activity.type)}/>
             </Typography>
           </Box>
           <Box display="flex" flexDirection="column" ml={6} mr={6} justifyContent="center">
@@ -57,7 +68,7 @@ const Activity = ({ activity }) => {
               {activity.title}
             </Typography>
             <Typography color="textSecondary" variant="body2">
-              {activity.date}
+            {new Date(activity.date).toLocaleDateString()} {new Date(activity.date).toLocaleTimeString()}
             </Typography>
           </Box>
           {activity.type === "phisical" ? 
